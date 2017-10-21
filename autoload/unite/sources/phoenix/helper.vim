@@ -8,7 +8,7 @@ function! unite#sources#phoenix#helper#gather_candidates_file(path)
       for f in split(globpath(d, '**/*.*') , '\n')
         if isdirectory(f) | continue | endif
         call add(files , 
-              \ {'name' : substitute(f , ".*\/web\/" , "" , "") , 'path' : f })
+              \ {'name' : substitute(f , ".*\/_build\/" , "" , "") , 'path' : f })
       endfor
     else
       let files = [{
@@ -77,7 +77,7 @@ endfunction
 " get phoenix root directory
 "
 function! unite#sources#phoenix#helper#phoenix_root()
-  let dir = finddir("web" , ".;")
+  let dir = finddir("_build" , ".;")
   if dir == "" | return "" | endif
   return  dir . "/../" 
 endfunction
